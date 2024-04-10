@@ -3,8 +3,9 @@ package main
 import (
 	"os"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
+	"github.com/nakulbh/ecommerce-platform/middlewares"
 	"github.com/nakulbh/ecommerce-platform/routes"
 )
 
@@ -15,15 +16,14 @@ func main() {
 	}
 
 
-	e := echo.New()
-	e.Use(middleware.Logger())
-	routes.UserRoutes(e)
+	r := chi.NewRouter()
+	r.Use(middleware.Logger())
+	routes.UserRoutes(r)
 
 
-	e.Use()
+	r.Use(middlewares.Authentication())
 	
 
-	e.Logger.Fatal(e.Start(":" + port))
 	
 
 }

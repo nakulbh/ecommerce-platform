@@ -1,15 +1,19 @@
 package routes
 
 import (
-	"github.com/labstack/echo/v4"
+	"github.com/go-chi/chi/v5"
 	"github.com/nakulbh/ecommerce-platform/controllers"
 )
 
-func UserRoutes(e *echo.Echo ){
-	e.POST("/users/signup",controllers.Signup())
-	e.POST("users/login",controllers.Login())
-	e.POST("/admin/addproduct",controllers.ProductViewerAdmin())
-	e.GET("/users/productview",controllers.SearchProduct())
-	e.GET("users/search",controllers.SearchProductByQuery())
+func UserRoutes(e *chi.Mux ){
+	e.Post("/users/signup",controllers.Signup())
+	e.Post("users/login",controllers.Login())
+	e.Post("/admin/addproduct",controllers.ProductViewerAdmin())
+	e.Get("/users/productview",controllers.SearchProduct())
+	e.Get("users/search",controllers.SearchProductByQuery())
 
+}
+
+func AuthenticationRoutes(e *chi.Mux){
+	e.Get("/addtocart", )
 }
